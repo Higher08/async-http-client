@@ -222,6 +222,7 @@ extension HTTPConnectionPool.ConnectionFactory {
                 self.setupTLSInProxyConnectionIfNeeded(channel, deadline: deadline, logger: logger)
             }
         }
+        return channelFuture
     }
 
     private func makeSOCKSProxyChannel<Requester: HTTPConnectionRequester>(
