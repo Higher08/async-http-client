@@ -192,6 +192,7 @@ extension HTTPConnectionPool.ConnectionFactory {
         // upgraded to TLS before we send our first request.
         logger.info("TLS boot")
         let bootstrapFuture = self.makeTLSBootstrap(requester: requester, connectionID: connectionID, deadline: deadline, eventLoop: eventLoop, logger: logger)
+        logger.info("TLS boot 2")
         var channelFuture = bootstrapFuture.flatMap { bootstrap -> EventLoopFuture<Channel> in
             logger.info("starting channel")
             return bootstrap.connect(host: proxy.host, port: proxy.port)
