@@ -398,6 +398,7 @@ extension HTTPConnectionPool.ConnectionFactory {
         logger: Logger
     ) -> EventLoopFuture<NIOClientTCPBootstrapProtocol> {
         var tlsConfig = self.tlsConfiguration
+        logger.info("TLS config")
         switch self.clientConfiguration.httpVersion.configuration {
         case .automatic:
             // since we can support h2, we need to advertise this in alpn
