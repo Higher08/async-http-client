@@ -208,9 +208,10 @@ extension HTTPConnectionPool.ConnectionFactory {
                 try channel.pipeline.syncOperations.addHandler(decoder)
                 try channel.pipeline.syncOperations.addHandler(proxyHandler)
             } catch {
+                logger.info("error")
                 return channel.eventLoop.makeFailedFuture(error)
             }
-
+            logger.info("wait")
             // The proxyEstablishedFuture is set as soon as the HTTP1ProxyConnectHandler is in a
             // pipeline. It is created in HTTP1ProxyConnectHandler's handlerAdded method.
             return proxyHandler.proxyEstablishedFuture!.flatMap {
