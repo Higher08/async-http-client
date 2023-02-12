@@ -20,7 +20,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
     typealias OutboundOut = HTTPClientRequestPart
     typealias InboundIn = HTTPClientResponsePart
 
-    enum State: String {
+    enum State {
         // transitions to `.connectSent` or `.failed`
         case initialized
         // transitions to `.headReceived` or `.failed`
