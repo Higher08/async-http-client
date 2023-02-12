@@ -216,7 +216,7 @@ extension HTTPConnectionPool.ConnectionFactory {
             // pipeline. It is created in HTTP1ProxyConnectHandler's handlerAdded method.
             return proxyHandler.proxyEstablishedFuture!.flatMap {
                 logger.info(.init(stringLiteral: String(describing: proxyHandler.state)))
-                channel.pipeline.removeHandler(proxyHandler).flatMap {
+                return channel.pipeline.removeHandler(proxyHandler).flatMap {
                     channel.pipeline.removeHandler(decoder).flatMap {
                         channel.pipeline.removeHandler(encoder)
                     }
