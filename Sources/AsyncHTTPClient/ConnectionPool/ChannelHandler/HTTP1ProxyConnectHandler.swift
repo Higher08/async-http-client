@@ -33,7 +33,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
         case completed
     }
 
-    private var state: State = .initialized
+    var state: State = .initialized
 
     private let targetHost: String
     private let targetPort: Int
