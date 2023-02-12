@@ -190,7 +190,7 @@ extension HTTPConnectionPool.ConnectionFactory {
         // A proxy connection starts with a plain text connection to the proxy server. After
         // the connection has been established with the proxy server, the connection might be
         // upgraded to TLS before we send our first request.
-        logger.info("TLS boot")
+        logger.info("TLS booted")
         let bootstrapFuture = self.makeTLSBootstrap(requester: requester, connectionID: connectionID, deadline: deadline, eventLoop: eventLoop, logger: logger)
         logger.info("TLS boot 2")
         var channelFuture = bootstrapFuture.flatMap { bootstrap -> EventLoopFuture<Channel> in
