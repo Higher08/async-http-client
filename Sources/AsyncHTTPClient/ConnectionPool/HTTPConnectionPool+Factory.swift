@@ -215,7 +215,7 @@ extension HTTPConnectionPool.ConnectionFactory {
             // The proxyEstablishedFuture is set as soon as the HTTP1ProxyConnectHandler is in a
             // pipeline. It is created in HTTP1ProxyConnectHandler's handlerAdded method.
             return proxyHandler.proxyEstablishedFuture!.flatMap {
-                logger.info(proxyHandler.state)
+                logger.info(.init(stringLiteral: proxyHandler.state))
                 channel.pipeline.removeHandler(proxyHandler).flatMap {
                     channel.pipeline.removeHandler(decoder).flatMap {
                         channel.pipeline.removeHandler(encoder)
