@@ -193,6 +193,7 @@ extension HTTPConnectionPool.ConnectionFactory {
         logger.info("TLS boot")
         let bootstrapFuture = self.makeTLSBootstrap(requester: requester, connectionID: connectionID, deadline: deadline, eventLoop: eventLoop, logger: logger)
         var channelFuture = bootstrapFuture.flatMap { bootstrap -> EventLoopFuture<Channel> in
+            logger.info("starting channel")
             return bootstrap.connect(host: proxy.host, port: proxy.port)
         }.flatMap { channel -> EventLoopFuture<NegotiatedProtocol> in
             let encoder = HTTPRequestEncoder()
