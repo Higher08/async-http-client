@@ -172,7 +172,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
         guard case .connectSent(let scheduled) = self.state else {
             preconditionFailure("HTTPDecoder should throw an error, if we have not send a request")
         }
-
+        print(head.status.code)
         switch head.status.code {
         case 200..<300:
             // Any 2xx (Successful) response indicates that the sender (and all
