@@ -103,6 +103,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
     }
 
     func channelInactive(context: ChannelHandlerContext) {
+        print(self.state)
         switch self.state {
         case .initialized:
             preconditionFailure("How can we receive a channelInactive before a channelActive?")
