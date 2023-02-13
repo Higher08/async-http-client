@@ -166,6 +166,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
         context.write(self.wrapOutboundOut(.head(head)), promise: nil)
         context.write(self.wrapOutboundOut(.end(nil)), promise: nil)
         context.flush()
+        print("flush")
     }
 
     private func handleHTTPHeadReceived(_ head: HTTPResponseHead, context: ChannelHandlerContext) {
