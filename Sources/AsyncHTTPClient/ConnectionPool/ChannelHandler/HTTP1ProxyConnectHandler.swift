@@ -74,6 +74,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
          targetPort: Int,
          proxyAuthorization: HTTPClient.Authorization?,
          deadline: NIODeadline) {
+        print(targetHost)
         self.targetHost = targetHost
         self.targetPort = targetPort
         self.proxyAuthorization = proxyAuthorization
@@ -82,7 +83,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
 
     func handlerAdded(context: ChannelHandlerContext) {
         self.proxyEstablishedPromise = context.eventLoop.makePromise(of: Void.self)
-
+        print("Send connect")
         self.sendConnect(context: context)
     }
 
@@ -131,9 +132,12 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
 
     private func sendConnect(context: ChannelHandlerContext) {
         guard case .initialized = self.state else {
+            print("return")
             // we might run into this handler twice, once in handlerAdded and once in channelActive.
             return
         }
+        
+        print("schedule")
 
         let timeout = context.eventLoop.scheduleTask(deadline: self.deadline) {
             switch self.state {
@@ -147,7 +151,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
                 break
             }
         }
-
+        print("Connect sent")
         self.state = .connectSent(timeout)
 
         var head = HTTPRequestHead(
