@@ -220,7 +220,7 @@ final class HTTP1ProxyConnectHandler: ChannelDuplexHandler, RemovableChannelHand
     }
 
     private func failWithError(_ error: Error, context: ChannelHandlerContext, closeConnection: Bool = true) {
-        print("fail")
+        print("fail", error)
         self.state = .failed(error)
         self.proxyEstablishedPromise?.fail(error)
         context.fireErrorCaught(error)
